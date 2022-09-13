@@ -1,6 +1,9 @@
 package com.example.ValidatorPattern.service.impl.user;
 
+import com.example.ValidatorPattern.model.Language;
 import com.example.ValidatorPattern.model.User;
+import com.example.ValidatorPattern.reposithory.UserRepository;
+import com.example.ValidatorPattern.service.LanguageService;
 import com.example.ValidatorPattern.service.UserService;
 import com.example.ValidatorPattern.service.UserValidatorService;
 
@@ -23,11 +26,19 @@ public class UserServiceImpl implements UserService {
 
     private final UserValidatorService validatorService;
 
+    private final UserRepository userRepository;
+
+    private final LanguageService languageService;
+
     @Override
     public User create(User user) {
-        validatorService.validate(user);
-
-        return user;
+        //validatorService.validate(user);
+        for (Language lang : user.getLanguages()) {
+            if (lang.getId() == null || lang.getId() == 0) {
+                lang = languageService.create(lang);
+            }
+        }
+        return userRepository.save(user);
     }
 
     @Override
@@ -70,12 +81,12 @@ public class UserServiceImpl implements UserService {
 
     private List<User> prepareUsersList(){
         List<User> users = new ArrayList<>();
-        users.add(new User("Bob",25,"bob@gmail.com",null));
-        users.add(new User("Stefan",25,"stefan@mail.com",null));
-        users.add(new User("Stefan",25,"stefan1@mail.com",null));
-        users.add(new User("Martin",25,"Martin@mail.com",null));
-        users.add(new User("Martin",25,"Martin2@mail.com",null));
-        users.add(new User("Martin",25,"Martin3@mail.com",null));
+        users.add(new User(0,"Bob",25,"bob@gmail.com",null));
+        users.add(new User(0,"Stefan",25,"stefan@mail.com",null));
+        users.add(new User(0,"Stefan",25,"stefan1@mail.com",null));
+        users.add(new User(0,"Martin",25,"Martin@mail.com",null));
+        users.add(new User(0,"Martin",25,"Martin2@mail.com",null));
+        users.add(new User(0,"Martin",25,"Martin3@mail.com",null));
         return users;
     }
 
