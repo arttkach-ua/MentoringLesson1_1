@@ -1,5 +1,6 @@
 package com.example.ValidatorPattern.validator.user;
 
+import com.example.ValidatorPattern.exceptions.ValidationException;
 import com.example.ValidatorPattern.model.User;
 import com.example.ValidatorPattern.util.Constant;
 import com.example.ValidatorPattern.validator.UserValidator;
@@ -22,8 +23,8 @@ public class UserEmailValidator implements UserValidator {
         return Constant.EMAIL_REGEX.matcher(email).matches();
     }
 
-    private IllegalArgumentException constructValidationException() {
-        return new IllegalArgumentException("Email is not valid");
+    private ValidationException constructValidationException() {
+        return new ValidationException("Email is not valid");
     }
 
 }

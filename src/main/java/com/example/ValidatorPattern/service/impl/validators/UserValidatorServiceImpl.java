@@ -1,4 +1,4 @@
-package com.example.ValidatorPattern.service.impl;
+package com.example.ValidatorPattern.service.impl.validators;
 
 import com.example.ValidatorPattern.model.User;
 import com.example.ValidatorPattern.service.UserValidatorService;
@@ -61,28 +61,5 @@ public class UserValidatorServiceImpl implements UserValidatorService {
 //                .flatMap(a->a.getLanguages().stream())
 //                .collect(Collectors.toList());
     }
-//    private List<User> initUsers(){
-//        List<String> lang = new ArrayList<>();
-//        lang.add("English");
-//        lang.add("French");
-//        List<String> lang1 = new ArrayList<>();
-//        lang1.add("English");
-//        lang1.add("French");
-//        lang1.add("Spanish");
-//
-//        User u1 = new User();
-//        User u2 = new User();
-//        User u3 = new User();
-//
-//        u1.setLanguages(lang);
-//        u2.setLanguages(lang);
-//        u3.setLanguages(lang1);
-//
-//        List<User> users = new ArrayList<>();
-//        users.add(u1);
-//        users.add(u2);
-//        users.add(u3);
-//
-//        return users;
-//    }
+
 }

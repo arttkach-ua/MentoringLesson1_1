@@ -1,4 +1,4 @@
-package com.example.ValidatorPattern.service.impl;
+package com.example.ValidatorPattern.service.impl.validators;
 
 import com.example.ValidatorPattern.model.Book;
 import com.example.ValidatorPattern.service.BookValidatorService;

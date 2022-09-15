@@ -1,14 +1,11 @@
 package com.example.ValidatorPattern.service.impl.user;
 
-import com.example.ValidatorPattern.model.Language;
 import com.example.ValidatorPattern.model.User;
 import com.example.ValidatorPattern.reposithory.UserRepository;
 import com.example.ValidatorPattern.service.LanguageService;
 import com.example.ValidatorPattern.service.UserService;
 import com.example.ValidatorPattern.service.UserValidatorService;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,9 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
@@ -32,13 +26,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
-        //validatorService.validate(user);
-        for (Language lang : user.getLanguages()) {
-            if (lang.getId() == null || lang.getId() == 0) {
-                lang = languageService.create(lang);
-            }
-        }
+        validatorService.validate(user);
+        //saveUsersLanguages(user);
         return userRepository.save(user);
+    }
+
+    private void saveUsersLanguages(User user) {
+        for (int i = 0; i < user.getLanguages().size(); i++) {
+            user.getLanguages().set(i, languageService.create(user.getLanguages().get(i)));
+        }
     }
 
     @Override
@@ -71,8 +67,8 @@ public class UserServiceImpl implements UserService {
         return prepareUsersList().stream()
                .collect(Collectors.toMap(User::getName, Arrays::asList,(old,latest)->{
                    List<User> res = new ArrayList<>();
-                   old.stream().forEach(a->res.add(a));
-                   latest.stream().forEach(a->res.add(a));
+                   old.stream().forEach(res::add);
+                   latest.stream().forEach(res::add);
                    return res;
                }));
 //        return prepareUsersList().stream()
@@ -89,5 +85,6 @@ public class UserServiceImpl implements UserService {
         users.add(new User(0,"Martin",25,"Martin3@mail.com",null));
         return users;
     }
+
 
 }
