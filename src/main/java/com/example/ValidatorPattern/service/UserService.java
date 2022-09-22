@@ -1,5 +1,6 @@
 package com.example.ValidatorPattern.service;
 
+import com.example.ValidatorPattern.model.Book;
 import com.example.ValidatorPattern.model.User;
 
 import java.util.List;
@@ -18,4 +19,11 @@ public interface UserService {
     void deleteAfterWorking() throws Exception;
 
     Map<String, List<User>> collectToMap();
+
+    List<Book> findBooksToRead(int userId);
+
+    User findById(int id);
+
+    Map<User, List<Book>> getAllAvailableCasesV1();
+
 }

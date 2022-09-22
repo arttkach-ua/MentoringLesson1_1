@@ -1,8 +1,6 @@
 package com.example.ValidatorPattern.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
@@ -12,7 +10,7 @@ import javax.persistence.*;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -22,5 +20,9 @@ public class Book {
 
     @Column(name = "author")
     private String author;
+
+    @ManyToOne
+    @JoinColumn(name="language_id")
+    private Language language;
 
 }

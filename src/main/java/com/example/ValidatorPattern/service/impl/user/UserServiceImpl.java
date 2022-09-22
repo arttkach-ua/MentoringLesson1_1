@@ -1,6 +1,9 @@
 package com.example.ValidatorPattern.service.impl.user;
 
+import com.example.ValidatorPattern.exceptions.ValidationException;
+import com.example.ValidatorPattern.model.Book;
 import com.example.ValidatorPattern.model.User;
+import com.example.ValidatorPattern.reposithory.BookRepository;
 import com.example.ValidatorPattern.reposithory.UserRepository;
 import com.example.ValidatorPattern.service.LanguageService;
 import com.example.ValidatorPattern.service.UserService;
@@ -8,10 +11,7 @@ import com.example.ValidatorPattern.service.UserValidatorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,10 +24,11 @@ public class UserServiceImpl implements UserService {
 
     private final LanguageService languageService;
 
+    private final BookRepository bookRepository;
+
     @Override
     public User create(User user) {
         validatorService.validate(user);
-        //saveUsersLanguages(user);
         return userRepository.save(user);
     }
 
@@ -73,6 +74,29 @@ public class UserServiceImpl implements UserService {
                }));
 //        return prepareUsersList().stream()
 //                .collect(Collectors.groupingBy(User::getName,mapping(user->user,toList())));
+    }
+
+    @Override
+    public List<Book> findBooksToRead(int userId) {
+        return bookRepository.findUnleadedBooks(userId);
+    }
+
+    @Override
+    public User findById(int id) {
+        return userRepository
+                .findById(id)
+                .orElseThrow(()->new ValidationException(String.format("User with id %d not found",id)));
+    }
+
+    @Override
+    public Map<User, List<Book>> getAllAvailableCasesV1() {
+        List<User> users = userRepository.findAll();
+        Map<User, List<Book>> result= new HashMap<>();
+        users.stream()
+                .forEach(user -> {
+                    result.put(user,bookRepository.findUnleadedBooks(user.getId()));
+                });
+        return result;
     }
 
     private List<User> prepareUsersList(){

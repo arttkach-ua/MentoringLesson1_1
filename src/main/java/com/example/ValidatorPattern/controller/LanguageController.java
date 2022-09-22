@@ -8,10 +8,9 @@ import com.example.ValidatorPattern.service.LanguageService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/language")
@@ -23,5 +22,14 @@ public class LanguageController {
     @PostMapping("/create")
     public ResponseEntity<Language> create(@RequestBody @NonNull Language language) {
         return ResponseEntity.ok(languageService.create(language));
+    }
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Language>> getAll() {
+        return ResponseEntity.ok(languageService.getAll());
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<Language> getById(@RequestBody int languageId) {
+        return ResponseEntity.ok(languageService.getById(languageId));
     }
 }

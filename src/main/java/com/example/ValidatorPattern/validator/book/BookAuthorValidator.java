@@ -1,5 +1,6 @@
 package com.example.ValidatorPattern.validator.book;
 
+import com.example.ValidatorPattern.exceptions.ValidationException;
 import com.example.ValidatorPattern.model.Book;
 import com.example.ValidatorPattern.util.Constant;
 import com.example.ValidatorPattern.validator.BookValidator;
@@ -22,8 +23,8 @@ public class BookAuthorValidator implements BookValidator {
         return Constant.NAME_REGEX.matcher(author).matches();
     }
 
-    private IllegalArgumentException constructValidationException() {
-        return new IllegalArgumentException("Author is not valid");
+    private ValidationException constructValidationException() {
+        return new ValidationException("Author is not valid");
     }
 
 }
