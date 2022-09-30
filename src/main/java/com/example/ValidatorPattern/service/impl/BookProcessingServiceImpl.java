@@ -14,7 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -36,4 +39,25 @@ public class BookProcessingServiceImpl implements BookProcessingService {
         ReadBook readBook = new ReadBook(readBookId,true, new Date());
         return readBookService.save(readBook);
     }
+    @Override
+    public boolean markAllBooksAsRead() {
+        Map<User, List<Book>> cases = userService.getAllAvailableCasesV1();
+
+        cases.forEach((user, books)->{
+            markThatUserGetBooksToRead(user, books);
+        });
+        return true;
+    }
+    @Transactional
+    private boolean markThatUserGetBooksToRead(User user, List<Book> books){
+        books.stream()
+                .forEach(book -> {
+                        ReadBookId readBookId = new ReadBookId(book.getId(), user.getId());
+                        ReadBook readBok = new ReadBook(readBookId,false, new Date());
+                        System.out.println(readBok);
+                        readBookService.save(readBok);
+        });
+        return true;
+    }
 }
+

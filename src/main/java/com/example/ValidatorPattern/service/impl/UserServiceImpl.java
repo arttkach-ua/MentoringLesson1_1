@@ -104,24 +104,6 @@ public class UserServiceImpl implements UserService {
                 });
         return result;
     }
-
-    //Function
-    @Override
-    @Transactional
-    public boolean markAllBooksAsRead() {
-        Map<User, List<Book>> cases = getAllAvailableCasesV1();
-
-        cases.forEach((user, books)->{
-            books.stream().forEach(book -> {
-                ReadBookId readBookId = new ReadBookId(book.getId(), user.getId());
-                ReadBook readBok = new ReadBook(readBookId,true, new Date());
-                readBookService.save(readBok);
-            });
-        });
-        return true;
-    }
-
-
     private List<User> prepareUsersList(){
         List<User> users = new ArrayList<>();
         users.add(new User(0,"Bob",25,"bob@gmail.com",null));

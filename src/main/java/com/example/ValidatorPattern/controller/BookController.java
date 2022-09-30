@@ -51,7 +51,7 @@ public class BookController {
 
     @PostMapping("/markAllBooksAsRead")
     public ResponseEntity markAllBooksAsRead(){
-        return ResponseEntity.ok(userService.markAllBooksAsRead());
+        return ResponseEntity.ok(bookProcessingService.markAllBooksAsRead());
     }
 
 }
