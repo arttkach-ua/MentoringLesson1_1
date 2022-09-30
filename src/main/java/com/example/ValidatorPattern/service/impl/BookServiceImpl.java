@@ -54,4 +54,10 @@ public class BookServiceImpl implements BookService {
         return userRepository.findUsersForBook(bookId);
     }
 
+    @Override
+    public void markBoodAsRead(Book book, User user) {
+        bookRepository.saveBookAsRead(book.getId(),user.getId());
+    }
+
+
 }

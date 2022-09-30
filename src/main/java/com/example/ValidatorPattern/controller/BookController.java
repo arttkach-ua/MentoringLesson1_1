@@ -8,6 +8,7 @@ import com.example.ValidatorPattern.model.readBook.ReadBookId;
 import com.example.ValidatorPattern.service.BookProcessingService;
 import com.example.ValidatorPattern.service.BookService;
 
+import com.example.ValidatorPattern.service.UserService;
 import com.sun.istack.NotNull;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,8 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+
+    private final UserService userService;
 
     private final BookProcessingService bookProcessingService;
 
@@ -44,6 +47,11 @@ public class BookController {
     @GetMapping("/findUsersForBook")
     public ResponseEntity<List<User>> findUsersForBook(@RequestBody @NotNull Integer bookId){
         return ResponseEntity.ok(bookService.findUsersForBook(bookId));
+    }
+
+    @PostMapping("/markAllBooksAsRead")
+    public ResponseEntity markAllBooksAsRead(){
+        return ResponseEntity.ok(userService.markAllBooksAsRead());
     }
 
 }

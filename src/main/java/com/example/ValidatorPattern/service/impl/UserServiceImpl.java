@@ -1,16 +1,20 @@
-package com.example.ValidatorPattern.service.impl.user;
+package com.example.ValidatorPattern.service.impl;
 
 import com.example.ValidatorPattern.exceptions.ValidationException;
 import com.example.ValidatorPattern.model.Book;
 import com.example.ValidatorPattern.model.User;
+import com.example.ValidatorPattern.model.readBook.ReadBook;
+import com.example.ValidatorPattern.model.readBook.ReadBookId;
 import com.example.ValidatorPattern.reposithory.BookRepository;
 import com.example.ValidatorPattern.reposithory.UserRepository;
 import com.example.ValidatorPattern.service.LanguageService;
+import com.example.ValidatorPattern.service.ReadBookService;
 import com.example.ValidatorPattern.service.UserService;
 import com.example.ValidatorPattern.service.UserValidatorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,6 +29,8 @@ public class UserServiceImpl implements UserService {
     private final LanguageService languageService;
 
     private final BookRepository bookRepository;
+
+    private final ReadBookService readBookService;
 
     @Override
     public User create(User user) {
@@ -98,6 +104,23 @@ public class UserServiceImpl implements UserService {
                 });
         return result;
     }
+
+    //Function
+    @Override
+    @Transactional
+    public boolean markAllBooksAsRead() {
+        Map<User, List<Book>> cases = getAllAvailableCasesV1();
+
+        cases.forEach((user, books)->{
+            books.stream().forEach(book -> {
+                ReadBookId readBookId = new ReadBookId(book.getId(), user.getId());
+                ReadBook readBok = new ReadBook(readBookId,true, new Date());
+                readBookService.save(readBok);
+            });
+        });
+        return true;
+    }
+
 
     private List<User> prepareUsersList(){
         List<User> users = new ArrayList<>();

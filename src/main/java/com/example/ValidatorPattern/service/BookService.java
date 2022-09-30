@@ -16,4 +16,5 @@ public interface BookService {
 
     List<User>findUsersForBook(int BookId);
 
+    void markBoodAsRead(Book book, User user);
 }

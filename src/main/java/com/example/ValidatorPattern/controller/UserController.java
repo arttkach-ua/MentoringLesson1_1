@@ -31,8 +31,6 @@ public class UserController {
 
     @PostMapping("/validateAgeAndName")
     public ResponseEntity<User> validateAgeAndName(@RequestBody @NonNull User user) {
-        //userService.deleteAfterWorking();
-
         return ResponseEntity.ok(userService.validateAgeAndName(user));
     }
 

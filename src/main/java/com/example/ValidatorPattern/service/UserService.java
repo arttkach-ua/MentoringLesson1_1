@@ -26,4 +26,6 @@ public interface UserService {
 
     Map<User, List<Book>> getAllAvailableCasesV1();
 
+    boolean markAllBooksAsRead();
+
 }
