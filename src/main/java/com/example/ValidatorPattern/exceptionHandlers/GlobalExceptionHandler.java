@@ -12,11 +12,11 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-   @ExceptionHandler(NullPointerException.class)
-   @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public ResponseEntity processNullPointerException(NullPointerException ex){
-       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getErrorMessage(ex));
-    }
+//   @ExceptionHandler(NullPointerException.class)
+//   @ResponseStatus(value = HttpStatus.NOT_FOUND)
+//    public ResponseEntity processNullPointerException(NullPointerException ex){
+//       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getErrorMessage(ex));
+//    }
 
     @ExceptionHandler(value = {ValidationException.class})
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
