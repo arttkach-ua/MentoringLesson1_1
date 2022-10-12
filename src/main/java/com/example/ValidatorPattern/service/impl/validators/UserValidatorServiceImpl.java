@@ -1,7 +1,7 @@
 package com.example.ValidatorPattern.service.impl.validators;
 
 import com.example.ValidatorPattern.model.User;
-import com.example.ValidatorPattern.service.UserValidatorService;
+import com.example.ValidatorPattern.service.validators.UserValidatorService;
 import com.example.ValidatorPattern.util.UserValidatorName;
 import com.example.ValidatorPattern.validator.UserValidator;
 import lombok.RequiredArgsConstructor;

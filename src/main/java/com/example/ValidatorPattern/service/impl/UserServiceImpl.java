@@ -3,18 +3,15 @@ package com.example.ValidatorPattern.service.impl;
 import com.example.ValidatorPattern.exceptions.ValidationException;
 import com.example.ValidatorPattern.model.Book;
 import com.example.ValidatorPattern.model.User;
-import com.example.ValidatorPattern.model.readBook.ReadBook;
-import com.example.ValidatorPattern.model.readBook.ReadBookId;
 import com.example.ValidatorPattern.reposithory.BookRepository;
 import com.example.ValidatorPattern.reposithory.UserRepository;
 import com.example.ValidatorPattern.service.LanguageService;
 import com.example.ValidatorPattern.service.ReadBookService;
 import com.example.ValidatorPattern.service.UserService;
-import com.example.ValidatorPattern.service.UserValidatorService;
+import com.example.ValidatorPattern.service.validators.UserValidatorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 

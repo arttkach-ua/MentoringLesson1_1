@@ -36,14 +36,15 @@ public class BookProcessingServiceImpl implements BookProcessingService {
     @Autowired
     public UtilService utilService;
 
+    @Lazy
     private BookProcessingService self;
-    @Autowired
-    ApplicationContext applicationContext;
+//    @Autowired
+//    ApplicationContext applicationContext;
 
-    @PostConstruct
-    void init() {
-        this.self = applicationContext.getBean(BookProcessingServiceImpl.class);
-    }
+//    @PostConstruct
+//    void init() {
+//        this.self = applicationContext.getBean(BookProcessingServiceImpl.class);
+//    }
 
 
     @Override

@@ -7,7 +7,7 @@ import com.example.ValidatorPattern.model.User;
 import com.example.ValidatorPattern.reposithory.BookRepository;
 import com.example.ValidatorPattern.reposithory.UserRepository;
 import com.example.ValidatorPattern.service.BookService;
-import com.example.ValidatorPattern.service.BookValidatorService;
+import com.example.ValidatorPattern.service.validators.BookValidatorService;
 
 import com.example.ValidatorPattern.util.Mapper;
 import lombok.RequiredArgsConstructor;

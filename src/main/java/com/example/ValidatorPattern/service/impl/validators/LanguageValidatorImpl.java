@@ -1,7 +1,7 @@
 package com.example.ValidatorPattern.service.impl.validators;
 
 import com.example.ValidatorPattern.model.Language;
-import com.example.ValidatorPattern.service.LanguageValidatorService;
+import com.example.ValidatorPattern.service.validators.LanguageValidatorService;
 
 import javax.xml.bind.ValidationException;
 

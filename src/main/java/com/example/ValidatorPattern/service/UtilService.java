@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface UtilService {
     boolean markThatUserGetBooksToRead(User user, List<Book> books);
+    void freeRoom();
 }
