@@ -34,14 +34,4 @@ public class ReadBookServiceImpl implements ReadBookService {
     public ReadBook save(ReadBook readBook) {
         return readBookRepository.save(readBook);
     }
-
-    @Override
-    public boolean readBookInAnyRoom(ReadBookDto readBookDto) {
-        User user = userService.findById(readBookDto.getUserId());
-        Book book = bookService.findById(readBookDto.getBookId());
-        ReadingRoom readingRoom = readingRoomService.findAnyFreeRoom();
-
-        readingRoom.setIsAvailable(false);
-        return true;
-    }
 }

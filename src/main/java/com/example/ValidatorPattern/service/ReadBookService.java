@@ -11,7 +11,4 @@ import org.springframework.stereotype.Service;
 @Component
 public interface ReadBookService {
     ReadBook save(ReadBook readBook);
-
-    boolean readBookInAnyRoom(ReadBookDto readBookDto);
-
 }

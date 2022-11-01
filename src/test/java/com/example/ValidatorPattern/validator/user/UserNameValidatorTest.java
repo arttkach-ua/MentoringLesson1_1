@@ -1,5 +1,6 @@
 package com.example.ValidatorPattern.validator.user;
 
+import com.example.ValidatorPattern.exceptions.ValidationException;
 import com.example.ValidatorPattern.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ class UserNameValidatorTest {
         User user = new User();
         user.setAge(25);
         user.setEmail("sss@gmail.com");
-        assertThrows(IllegalArgumentException.class, ()->{validator.validate(user);});
+        assertThrows(ValidationException.class, ()->{validator.validate(user);});
     }
 
     @Test
@@ -35,7 +36,7 @@ class UserNameValidatorTest {
         user.setAge(25);
         user.setName("");
         user.setEmail("sss@gmail.com");
-        assertThrows(IllegalArgumentException.class, ()->{validator.validate(user);});
+        assertThrows(ValidationException.class, ()->{validator.validate(user);});
     }
 
     @Test
@@ -53,7 +54,7 @@ class UserNameValidatorTest {
         user.setAge(25);
         user.setName("sss sss");
         user.setEmail("sss@gmail.com");
-        assertThrows(IllegalArgumentException.class, ()->{validator.validate(user);});
+        assertThrows(ValidationException.class, ()->{validator.validate(user);});
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.ValidatorPattern.validator.user;
 
+import com.example.ValidatorPattern.exceptions.ValidationException;
 import com.example.ValidatorPattern.model.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +34,7 @@ class UserAgeValidatorTest {
         user.setAge(-99);
         user.setName("sss sss");
         user.setEmail("sss@gmail.com");
-        assertThrows(IllegalArgumentException.class, ()->{validator.validate(user);});
+        assertThrows(ValidationException.class, ()->{validator.validate(user);});
     }
     @Test
     void validateUserZeroAge(){
@@ -41,7 +42,7 @@ class UserAgeValidatorTest {
         user.setAge(0);
         user.setName("sss sss");
         user.setEmail("sss@gmail.com");
-        assertThrows(IllegalArgumentException.class, ()->{validator.validate(user);});
+        assertThrows(ValidationException.class, ()->{validator.validate(user);});
     }
 
     @Test

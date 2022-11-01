@@ -4,6 +4,7 @@ import com.example.ValidatorPattern.dto.BookDto;
 import com.example.ValidatorPattern.model.Book;
 import com.example.ValidatorPattern.service.LanguageService;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

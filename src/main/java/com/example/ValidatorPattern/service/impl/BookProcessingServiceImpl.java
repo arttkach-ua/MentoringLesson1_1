@@ -1,6 +1,8 @@
 package com.example.ValidatorPattern.service.impl;
 
+import com.example.ValidatorPattern.dto.ReadBookDto;
 import com.example.ValidatorPattern.model.Book;
+import com.example.ValidatorPattern.model.ReadingRoom;
 import com.example.ValidatorPattern.model.User;
 import com.example.ValidatorPattern.model.readBook.ReadBook;
 import com.example.ValidatorPattern.model.readBook.ReadBookId;
@@ -32,27 +34,18 @@ public class BookProcessingServiceImpl implements BookProcessingService {
     private BookService bookService;
     @Autowired
     public ReadBookService readBookService;
-
     @Autowired
     public UtilService utilService;
-
+    @Autowired
+    private ReadingRoomService readingRoomService;
     @Lazy
     private BookProcessingService self;
-//    @Autowired
-//    ApplicationContext applicationContext;
-
-//    @PostConstruct
-//    void init() {
-//        this.self = applicationContext.getBean(BookProcessingServiceImpl.class);
-//    }
-
 
     @Override
     public ReadBook markBookAsRead(ReadBookId readBookId) {
         bookService.findById(readBookId.getBookId());
         userService.findById(readBookId.getUserId());
 
-        //TODO: do procedure to set book as read
         ReadBook readBook = new ReadBook(readBookId, true, new Date());
         return readBookService.save(readBook);
     }
@@ -80,6 +73,23 @@ public class BookProcessingServiceImpl implements BookProcessingService {
         return true;
     }
 
+    @Override
+    public boolean readBookInAnyReadingRoom(ReadBookDto readBookDto) {
+        User user = userService.findById(readBookDto.getUserId());
+        Book book = bookService.findById(readBookDto.getBookId()) ;
+        ReadingRoom readingRoom = readingRoomService.findAnyFreeRoom();
+
+        ReadBookId readBookId = new ReadBookId(readBookDto.getBookId(),readBookDto.getUserId());
+        ReadBook readBook = new ReadBook(readBookId,true, new Date());
+        readBookService.save(readBook);
+
+        readingRoom.setIsAvailable(false);
+        readingRoomService.save(readingRoom);
+
+        readingRoomService.freeRoomWithDelay(readingRoom);
+        return true;
+    }
+
     public static void throwRandException() {
         casesProcessed++;
         if (casesProcessed==5){
@@ -88,6 +98,7 @@ public class BookProcessingServiceImpl implements BookProcessingService {
             throw new RuntimeException();
         }
     }
+
 
 
 }
