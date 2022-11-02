@@ -1,12 +1,14 @@
 package com.example.ValidatorPattern.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
 @Table(name = "reading_rooms")
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReadingRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

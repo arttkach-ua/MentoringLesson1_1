@@ -24,12 +24,6 @@ public class ReadBookServiceImpl implements ReadBookService {
 @Autowired
     private ReadBookRepository readBookRepository;
 
-    private UserService userService;
-
-    private BookService bookService;
-
-    private ReadingRoomService readingRoomService;
-
     @Override
     public ReadBook save(ReadBook readBook) {
         return readBookRepository.save(readBook);

@@ -62,11 +62,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteAfterWorking() {
-        validatorService.deleteAfterWorking();
-    }
-
-    @Override
     public Map<String, List<User>> collectToMap() {
         return prepareUsersList().stream()
                .collect(Collectors.toMap(User::getName, Arrays::asList,(old,latest)->{
@@ -75,8 +70,6 @@ public class UserServiceImpl implements UserService {
                    latest.stream().forEach(res::add);
                    return res;
                }));
-//        return prepareUsersList().stream()
-//                .collect(Collectors.groupingBy(User::getName,mapping(user->user,toList())));
     }
 
     @Override

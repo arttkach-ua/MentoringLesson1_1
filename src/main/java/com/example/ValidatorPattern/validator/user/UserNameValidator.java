@@ -3,12 +3,13 @@ package com.example.ValidatorPattern.validator.user;
 import com.example.ValidatorPattern.exceptions.ValidationException;
 import com.example.ValidatorPattern.model.User;
 import com.example.ValidatorPattern.util.Constant;
+import com.example.ValidatorPattern.util.UserValidatorName;
 import com.example.ValidatorPattern.validator.UserValidator;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Component()
+@Component(UserValidatorName.NAME_VALIDATOR)
 public class UserNameValidator implements UserValidator {
 
     @Override

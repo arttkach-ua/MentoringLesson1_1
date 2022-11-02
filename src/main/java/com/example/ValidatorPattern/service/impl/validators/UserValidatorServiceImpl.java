@@ -53,13 +53,4 @@ public class UserValidatorServiceImpl implements UserValidatorService {
         validatorsAgeAndName.add(UserValidatorName.AGE_VALIDATOR);
     }
 
-    @Override
-    public void deleteAfterWorking(){
-//        List<User> users = initUsers();
-//
-//        List<Language> userList = users.stream()
-//                .flatMap(a->a.getLanguages().stream())
-//                .collect(Collectors.toList());
-    }
-
 }

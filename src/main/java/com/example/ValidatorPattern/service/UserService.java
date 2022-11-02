@@ -16,8 +16,6 @@ public interface UserService {
 
     User validateAgeAndName(User user);
 
-    void deleteAfterWorking() throws Exception;
-
     Map<String, List<User>> collectToMap();
 
     List<Book> findBooksToRead(int userId);

@@ -9,6 +9,4 @@ public interface UserValidatorService {
     void validateAdmin(User user);
 
     void validateAgeAndName(User user);
-
-    void deleteAfterWorking();
 }
